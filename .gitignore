@@ -1,0 +1,18 @@
+# git ignore file
+
+# specific files for this project
+
+# emacs backup files 
+\#*#
+*~
+
+# python
+__pycache__
+*.pyc
+
+# various other generated files
+*.o
+
+
+
+
