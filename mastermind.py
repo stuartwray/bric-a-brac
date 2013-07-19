@@ -17,7 +17,7 @@ def Entropy(counts):
     if total == 0:
         return 0
 
-    # entropy, H = Sum (Pi * log2 (1/Pi))  
+    # entropy, H = Sum (Pi * log2 (1/Pi))
     probs = (i/total for i in counts if i != 0)
     return sum(p * log2(1/p) for p in probs)
 
@@ -45,16 +45,16 @@ class Colour:
 # all_colours = ("red", "green", etc ...
 # But this makes it more like the C++ version:
 
-all_colours = (Colour("red"), 
+all_colours = (Colour("red"),
                Colour("green"),
                Colour("blue"),
-               Colour("yellow"), 
-               Colour("white"), 
+               Colour("yellow"),
+               Colour("white"),
                Colour("black"))
-    
+
 class Position:
     WIDTH = 4
-    
+
     def __init__(self, *pegs):
         self.pegs = tuple(pegs)
         count_map = collections.defaultdict(int)
@@ -62,7 +62,7 @@ class Position:
             count_map[peg] += 1
         # for this to work, all_colours must not change
         self.counts = [count_map[p] for p in all_colours]
-    
+
     def __str__(self):
         return ".".join(str(p) for p in self.pegs)
 
@@ -70,7 +70,7 @@ class Position:
 
     def __eq__(self, other):
         return all(s == o for s, o in zip (self.pegs, other.pegs))
-        
+
     def __ne__(self, other):
         return not (self == other)
 
@@ -86,7 +86,7 @@ class Position:
         pairs = zip(self.counts, correct.counts)
         total = sum([min(s, c) for s, c in pairs])
 
-        # combined marks 
+        # combined marks
         return "b" * blacks + "w" * (total - blacks)
 
     @classmethod
@@ -98,7 +98,7 @@ class Position:
     def MakeAllPositions(cls, colours):
         return list(cls(*pegs) for pegs in \
                     itertools.product(colours, repeat=cls.WIDTH))
-    
+
 #-----------------------------------------------------
 
 # This is the secret position to guess
@@ -125,21 +125,21 @@ while (True):
     else:
         # Find the challenge with the highest entropy
         max_ent = -1.0;
-      
+
         # For all remaining challenges ...
-      
+
         for challenge in challenges:
             # Mark every remaining candidate
             mark2Count = collections.defaultdict(int)
             for candidate in candidates:
                 mark2Count[candidate.Mark(challenge)] += 1
-        
+
             # Determine the entropy associated with this distribution of marks
 
             entropy = Entropy(mark2Count.values())
-            
+
             # is this the best so far?
-            
+
             if (entropy > max_ent):
                 max_ent_pos = challenge
                 max_ent = entropy;
@@ -172,5 +172,5 @@ print("Solution is ", answer)
 print("------------------------------------------------------")
 
 
-    
+
 

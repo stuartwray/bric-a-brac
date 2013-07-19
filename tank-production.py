@@ -1,11 +1,16 @@
+#!/usr/bin/python3
+
 from problib import *
 
-# Five captured German tanks with these serial numbers:
+# This data is from a column in the Guardian
+# ("Gavyn Davies does the maths", 20 July 2006),
+# In WW2 there were five captured German tanks with these serial numbers:
 
 serials = [20, 31, 43, 78, 92]
 
-# According to Guardian ("Gavyn Davies does the maths, 20 July 2006), 
-# if    M = the highest observed serial,
+# Problem to solve: what is the most likely production run?
+# According to the article, here's how to it out:
+# let   M = the highest observed serial,
 # and   S = number of serials,
 # then  E = (M - 1) * (S + 1) / S
 #       is a good estimator of the production run
@@ -13,14 +18,14 @@ serials = [20, 31, 43, 78, 92]
 #       (in this case E = 109.2)
 
 # Let's see what Bayes thinks ...
-
+#
 # P(H|D) = P(D|H) P(H|)
 #          ------------
 #             P(D|)
 #
 # Where P(D|) = sum over all h of P(D|h) P(h|)
 
-max_conceivable_number = 10000 # to pick something out of a hat
+max_conceivable_number = 10000 # pick a number that seems big enough
 log_probs = []
 
 for i in range(max_conceivable_number):
@@ -37,11 +42,11 @@ for i in range(max_conceivable_number):
             # uniform prob of picking any in this size production run,
             # but need to account for the ones we already picked
             left_in_run = i - n
-            log_P_D_given_H += log(1.0 / left_in_run) 
+            log_P_D_given_H += log(1.0 / left_in_run)
 
     log_likelihood_D = log_P_D_given_H + log_P_H_given_nothing
     log_probs.append(log_likelihood_D)
-    
+
 # Now need to divide all by P(D|), which is just normalisation ...
 
 log_probs = log_normalise(log_probs)
@@ -51,16 +56,15 @@ log_probs = log_normalise(log_probs)
 # so translate to cumulative frequency and plot
 
 cumulative = 0.0
-out = open("tmp.csv", "wb")
+out = open("tmp.csv", "w")
 
 for i, p in zip(range(len(log_probs)), log_probs):
     if i > 200:
         break
     cumulative += exp(p)
     text = "%d,%f" % (i, cumulative)
-    print text
-    print >>out, text
-
+    print(text)
+    print(text, file=out)
 
 out.close()
 

@@ -7,12 +7,12 @@ def factorial(n):
         return 1
     else:
         return n * factorial(n - 1)
-        
+
 def log_factorial(x):
     if x == 0:
         return log(1)
     else:
-        x = float(x)
+        # the usual approximation
         return x * log(x)- x + log(2 * pi * x)/2 + 1/(12 * x) - 1/(360*x*x*x)
 
 def log_choice(n, k):
@@ -32,7 +32,7 @@ def log_sum(log_probs):
         return max_log_prob + log(s)
 
 log_product = sum # so our calculations look consistent
-  
+
 def log_normalise(log_probs):
     log_total = log_sum(log_probs)
     if log_total == logZERO:

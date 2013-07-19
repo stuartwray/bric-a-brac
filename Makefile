@@ -15,7 +15,7 @@ mastermind-cc: mastermind-cc.cc
 .PHONY: clean
 
 clean:
-	rm -f  $(PROGRAMS) *.a *.o *~
+	rm -f  $(PROGRAMS) *.a *.o *~ tmp.csv
 
 
 
