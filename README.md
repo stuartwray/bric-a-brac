@@ -1,7 +1,7 @@
 bric-a-brac
-===========
+-----------
 
-bric-a-brac: (n.) Old curiosities of artistic character, knick-knacks, 
+*bric-a-brac*: (n.) Old curiosities of artistic character, knick-knacks, 
 antiquarian odds-and-ends, such as old furniture, plate, china, fans, 
 statuettes, and the like. (OED)
 
