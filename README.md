@@ -20,6 +20,11 @@ exercise 1.19 of SICP, which works like a a square-and-multiply exponentiator.
 
 `mastermind.py` The same mastermind solver in Python. (Quite a bit slower.)
 
+`match.c` A simple regexp matcher.
+
+`match-continuation-passing.c` The same regexp matcher, but transformed 
+into continuation-passing style. 
+
 `monads-and-gonads.py` A python version of code from Douglas Crockford's
 "Monads and Gonads" talk.
 
