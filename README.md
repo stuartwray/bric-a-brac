@@ -14,7 +14,7 @@ variables, the correlation between their sum and any one of them is r = 0.5
 
 `fast-fib.py` Some implementations of the Fibonacci function, with a timing 
 harness to benchmark them. Includes an interesting implementation based on
-exercise 1.19 of SICP, which works like a a square-and-multiply exponentiator.
+exercise 1.19 of SICP, which works like a square-and-multiply exponentiator.
 
 `mastermind-cc.cc` Invents a random mastermind position and solves it.
 
